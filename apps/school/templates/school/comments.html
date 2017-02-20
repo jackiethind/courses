@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% include 'school/styling_links.html'%}
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h4>Name: {{ course.course_name }} </h4>
+                    <h4>Description: {{ course.description }}</h4>
+                    <h3>Add a comment:</h3>
+                    <form action="/comments/{{ course.id }}" method="POST">
+                        {% csrf_token %}
+                        <textarea class="form-control" name="comment" rows="3" placeholder="Comment"></textarea>
+                        <button type="submit" name="submit" value ="Back" class="btn btn-secondary btn-md">
+                        <i class="fa fa-trash-o fa-sm"></i> Back
+                        </button>
+                        <button type="submit" name="submit" value ="Submit" class="btn btn-primary btn-md">
+                        <i class="fa fa-trash-o fa-sm"></i> Submit
+                        </button>
+
+                    </form>
+                    {% for comment in comments %}
+                        {% if course.id == comment.course.id %}
+
+                        <p>{{ comment.comment }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

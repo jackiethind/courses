@@ -8,15 +8,15 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 text-center">
+                <div class="col-md-4 text-center">
                     <h3>Are you sure you want to delete the following course?</h3>
                     <h4>Name: {{ course.course_name }} </h4>
-                    <h4>Description: {{ description.course.description }}</h4>
-                    <form class="" action="/complete_delete" method="POST">
+                    <h4>Description: {{ course.description }}</h4>
+                    <form action="/delete/{{ course.id }}" method="POST">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-secondary btn-md" href="#">
+                        <button type="submit" name="submit" value ="No" class="btn btn-secondary btn-md">
                         <i class="fa fa-md"></i> No
-                        <button type="submit" class="btn btn-danger btn-md" href="#">
+                        <button type="submit" name="submit" value ="Delete" class="btn btn-danger btn-md">
                         <i class="fa fa-trash-o fa-sm"></i> Delete
                         </button>
                     </form>

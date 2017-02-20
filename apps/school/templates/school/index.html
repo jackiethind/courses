@@ -10,15 +10,14 @@
             <div class="row">
                 <div class="col-md-4">
                     <h3>Add a new course</h3>
-                    <form class="" action="/process" method="POST">
+                    <form action="/process" method="POST">
                         {% csrf_token %}
                         <label for="name">Name:</label>
-                        <input type="text" name="name" class="form-control" placeholder="Barrack Obama">
+                        <input type="text" name="name" class="form-control" placeholder="Cognitive Science">
                         <label for="description">Description:</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>
-                        <button type="submit" class="btn btn-success btn-md" href="#">
-                        <i class="fa fa-check-square-o" aria-hidden="true"></i> Add
-                        </button>
+                        <button type="submit" name="submit" value = "Add" class="btn btn-success btn-md" href="#">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> Add</button>
                     </form>
                     {% if messages %}
                             {% for message in messages %}
@@ -39,14 +38,19 @@
                         {% for course in courses %}
                           <tr>
                             <td>{{ course.course_name }}</td>
-                            <td>{{ course.description }}</td>
+                            <td>{{ course.course_id.description }}</td>
                             <td>{{ course.created_at }}</td>
                             <td>
-                                <form class="" action="/delete/{{ course.id }}" method="post">
+                                <a href="/delete/{{course.id}}">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm" href="#">
+                                <button type="button" class="btn btn-danger btn-sm" href="#">
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i> Delete
-                                </button></form></td>
+                                </button></a>
+                                <a href="/comments/{{ course.id }}">
+                                <button type="button" value ="submit" class="btn btn-danger btn-sm" href="#">
+                                <i class="fa fa-check-square-o" aria-hidden="true"></i> Comment
+                                </button></a>
+                            </td>
                           </tr>
                         {% endfor %}
                         </tbody>
